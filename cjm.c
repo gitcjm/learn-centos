@@ -1,8 +1,5 @@
-#include<stdio.h>
-
-int get_age() {
-  return 18;
-}
+#include <stdio.h>
+#include "me.h"
 
 int main(){
   int age = get_age();
