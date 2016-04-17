@@ -2,10 +2,10 @@
 #include "me.h"
 
 int main(){
-  // printf("Hello cjm\n");
+  printf("Hello cjm\n");
 
-  // float age = get_age();
-  // printf("my age is %f\n", age);
+  int age = get_age();
+  printf("my age is %d\n", age);
   
   // char ch[] = "崔军明";
   // printf("my name is %s\n", ch);

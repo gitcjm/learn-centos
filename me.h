@@ -1,1 +1,1 @@
-float get_age();
+int get_age();
