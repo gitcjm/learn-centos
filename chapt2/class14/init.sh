@@ -18,9 +18,13 @@ CONF_TXT="conf.txt"
 
 if [ ! -e $LIC_FILE ]
 then
-	wget -O $CONF_TXT $SRC_CONFFILE
+	if [ ! -e $CONF_TXT ]
+	then
+		wget -O $CONF_TXT $SRC_CONFFILE
+	fi
+	sed -n '1p' $CONF_TXT > $LIC_FILE
 fi
-sed -n '1p' $CONF_TXT > $LIC_FILE
+
 echo "licence is created"
-rm -f $CONF_TXT
+# rm -f $CONF_TXT
 echo "init done"
