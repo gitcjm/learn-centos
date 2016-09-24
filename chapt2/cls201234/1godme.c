@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 int main() {
+	printf("godme daemon process.\n");
 
 	int pid;
 	pid = fork();

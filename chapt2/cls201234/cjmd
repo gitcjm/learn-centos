@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# add for chkconfig
+# chkconfig: 35 80 10	// 80代表启动优先级；10代表关闭优先级
+# description: cjmd is my test daemon process.
+# processname: cjmd
+# 把此脚本放在/etc/init.d/目录下，
+# 然后执行 chkconfig --add cjmd 命令
+
+# source function library
+. /etc/rc.d/init.d/functions
+
+RETVAL=0
+prog="cjmd"
+CJMD=/home/cjm/learncent/chapt2/cls201234/1godme
+lockfile=/var/lock/subsys/$prog
+pidfile=/var/run/cjmd.pid
+
+start() {
+	echo -n $"starting $prog: "
+	[ ! -f $lockfile ] && $CJMD
+	RETVAL=$?
+	if [ $RETVAL -eq 0 ]; then
+		echo `pidofproc $CJMD` >$pidfile
+  		touch $lockfile
+	fi
+}
+
+stop() {
+	echo -n $"Stopping $prog: "	
+	kill `pidofproc $CJMD` >/dev/null 2>&1	
+	rm -f $pidfile
+	rm -f $lockfile
+}
+
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		restart
+		;;
+	*)
+		echo "Usage: start stop restart"
+		exit 2
+esac
+
+exit $?
